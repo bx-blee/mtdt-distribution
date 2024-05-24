@@ -1,0 +1,4 @@
+(mtdt-distribution
+  :fetcher github
+  :repo "bx-blee/mtdt-distribution"
+  :files ("*.el"))
