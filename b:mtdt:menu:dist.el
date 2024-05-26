@@ -90,11 +90,11 @@ Module description comes here.
 
   ;; Determine starting value of b:mtdt:compose:framework
   ;;(setq  b:mtdt:compose:framework b:mtdt:compose:framework::basic)
-  (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg)
+  ;; (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg)
 
-  (when org-msg-mode
-    (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg))
-  (b:mtdt:compose:framework/setup b:mtdt:compose:framework)
+  ;; (when org-msg-mode
+  ;;   (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg))
+  ;; (b:mtdt:compose:framework/setup b:mtdt:compose:framework)
 
   (easy-menu-add-item
    <menuLabel
@@ -133,15 +133,31 @@ Module description comes here.
     (defun $menuItem|selRecordAsSelRecipients ()
       (nth 0
        `(
-         [,(s-lex-format "Set Selected BBDB Record As Selected Recipients")
+         [,(s-lex-format "Selected *BBDB* Record as Selected Recipients")
           (b:mtdt:bbdb3/selRecordAsSelRecipients)
+          :help "Set Selected BBDB Record As Selected Recipients"
+          ])))
+
+    (defun $menuItem|selRecordAsSelRecipientsAndSend ()
+      (nth 0
+       `(
+         [,(s-lex-format "Selected Record as Selected Recipients and SEND")
+          (b:mtdt:bbdb3/selRecordAsSelRecipientsAndSend)
           :help "Set Selected BBDB Record As Selected Recipients"
           ])))
 
     (defun $menuItem|allRecordsAsSelRecipients ()
       (nth 0
        `(
-         [,(s-lex-format "Set All BBDB Records As Selected To: Recipients")
+         [,(s-lex-format "All *BBDB* Records As Selected To: Recipients")
+          (b:mtdt:bbdb3/allRecordsAsSelRecipients)
+          :help "Set All BBDB Records As Selected To: Recipients"
+          ])))
+
+    (defun $menuItem|allRecordsAsSelRecipientsAndSend ()
+      (nth 0
+       `(
+         [,(s-lex-format "All Records As Selected To: Recipients and SEND")
           (b:mtdt:bbdb3/allRecordsAsSelRecipients)
           :help "Set All BBDB Records As Selected To: Recipients"
           ])))
@@ -173,9 +189,17 @@ Module description comes here.
     (defun $menuItem|recipsCapture ()
       (nth 0
        `(
-         [,(s-lex-format "Capture Names of *BBDB* as Recips and select file")
+         [,(s-lex-format "Capture Records of *BBDB* as Recips and Select File")
           (b:mtdt:bbdb3/recipsFileSelect)
           :help "Capture Names of *BBDB* as Recips and select file"
+          ])))
+
+    (defun $menuItem|recipsCaptureAndSend ()
+      (nth 0
+       `(
+         [,(s-lex-format "Capture Records as Recips, Select File and SEND")
+          (b:mtdt:bbdb3/recipsFileSelectAndSend)
+          :help "Capture Names of *BBDB* as Recips, Select File and SEND"
           ])))
 
     (defun $menuItem|visitRecipsCaptureFile ()
@@ -202,11 +226,14 @@ Module description comes here.
 	))
 
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|selRecordAsSelRecipients) (s-- 3))
+    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|selRecordAsSelRecipientsAndSend) (s-- 3))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|allRecordsAsSelRecipients) (s-- 3))
+    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|allRecordsAsSelRecipientsAndSend) (s-- 3))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|bbdbPopUpOtherWin) (s-- 4))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|namesCapture) (s-- 5))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|visitNamesCaptureBuf) (s-- 5))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|recipsCapture) (s-- 6))
+    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|recipsCaptureAndSend) (s-- 6))
     (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|visitRecipsCaptureFile) (s-- 6))
 
     (easy-menu-add-item
