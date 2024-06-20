@@ -88,14 +88,6 @@ Module description comes here.
 ** DocStr: Adds this as a submenu to menu labeled =<menuLabel= at specified delimited =<menuDelimiter=.
 #+end_org "
 
-  ;; Determine starting value of b:mtdt:compose:framework
-  ;;(setq  b:mtdt:compose:framework b:mtdt:compose:framework::basic)
-  ;; (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg)
-
-  ;; (when org-msg-mode
-  ;;   (setq  b:mtdt:compose:framework b:mtdt:compose:framework::orgMsg))
-  ;; (b:mtdt:compose:framework/setup b:mtdt:compose:framework)
-
   (easy-menu-add-item
    <menuLabel
    nil
@@ -113,235 +105,6 @@ Module description comes here.
 #+RESULTS:
 : No Records
 
-" orgCmntEnd)
-
-
-;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:menu:dist:define|bbdb3" :advice ()
-(orgCmntBegin "
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:menu:dist:define|bbdb3>>  --   [[elisp:(org-cycle)][| ]]
-" orgCmntEnd)
-(defun b:mtdt:menu:dist:define|bbdb3 (
-;;;#+END:
-                                 )
-  " #+begin_org
-** DocStr: Return b:mtdt:menu:dist:sendExtentSelect
-#+end_org "
-  (let (
-	($thisFuncName (compile-time-function-name))
-	)
-
-    (defun $menuItem|selRecordAsSelRecipients ()
-      (nth 0
-       `(
-         [,(s-lex-format "Selected *BBDB* Record as Selected Recipients")
-          (b:mtdt:bbdb3/selRecordAsSelRecipients)
-          :help "Set Selected BBDB Record As Selected Recipients"
-          ])))
-
-    (defun $menuItem|selRecordAsSelRecipientsAndSend ()
-      (nth 0
-       `(
-         [,(s-lex-format "Selected Record as Selected Recipients and SEND")
-          (b:mtdt:bbdb3/selRecordAsSelRecipientsAndSend)
-          :help "Set Selected BBDB Record As Selected Recipients"
-          ])))
-
-    (defun $menuItem|allRecordsAsSelRecipients ()
-      (nth 0
-       `(
-         [,(s-lex-format "All *BBDB* Records As Selected To: Recipients")
-          (b:mtdt:bbdb3/allRecordsAsSelRecipients)
-          :help "Set All BBDB Records As Selected To: Recipients"
-          ])))
-
-    (defun $menuItem|allRecordsAsSelRecipientsAndSend ()
-      (nth 0
-       `(
-         [,(s-lex-format "All Records As Selected To: Recipients and SEND")
-          (b:mtdt:bbdb3/allRecordsAsSelRecipients)
-          :help "Set All BBDB Records As Selected To: Recipients"
-          ])))
-
-    (defun $menuItem|bbdbPopUpOtherWin ()
-      (nth 0
-       `(
-         [,(s-lex-format "Pop Up *BDBD* buffer other window")
-          (b:bbdb3/popUpOtherWin)
-          :help "Pop Up *BDBD* buffer other window"
-          ])))
-
-    (defun $menuItem|namesCapture ()
-      (nth 0
-       `(
-         [,(s-lex-format "Capture Names of *BBDB* in a temp buffer")
-          (b:mtdt:bbdb3/namesCapture)
-          :help "Capture names of *BBDB* in a temp buffer"
-          ])))
-
-    (defun $menuItem|visitNamesCaptureBuf ()
-      (nth 0
-       `(
-         [,(s-lex-format "Visit Names Capture Buffer")
-          (switch-to-buffer-other-window b:mtdt:bbdb3:namesCaptureBuf)
-          :help "Visit Names Capture Buffer"
-          ])))
-
-    (defun $menuItem|recipsCapture ()
-      (nth 0
-       `(
-         [,(s-lex-format "Capture Records of *BBDB* as Recips and Select File")
-          (b:mtdt:bbdb3/recipsFileSelect)
-          :help "Capture Names of *BBDB* as Recips and select file"
-          ])))
-
-    (defun $menuItem|recipsCaptureAndSend ()
-      (nth 0
-       `(
-         [,(s-lex-format "Capture Records as Recips, Select File and SEND")
-          (b:mtdt:bbdb3/recipsFileSelectAndSend)
-          :help "Capture Names of *BBDB* as Recips, Select File and SEND"
-          ])))
-
-    (defun $menuItem|visitRecipsCaptureFile ()
-      (nth 0
-       `(
-         [,(s-lex-format "Visit Recips Capture File")
-          (find-file b:mtdt:bbdb3:namesCaptureRecipsFile)
-          :help "Visit Recips Capture File"
-          ])))
-
-    (easy-menu-define
-      b:mtdt:menu:dist:bbdb3
-      nil
-      "DocStr of this menu --"
-      `(,(format (s-lex-format "With BBDB Select MTDT Recipients"))
-	:help "With BBDB Select MTDT Recipients"
-	,(s-- 3)
-	,(s-- 4)
-	,(s-- 5)
-	,(s-- 6)
-	,(s-- 7)
-	,(s-- 8)
-	,(s-- 9)
-	))
-
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|selRecordAsSelRecipients) (s-- 3))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|selRecordAsSelRecipientsAndSend) (s-- 3))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|allRecordsAsSelRecipients) (s-- 3))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|allRecordsAsSelRecipientsAndSend) (s-- 3))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|bbdbPopUpOtherWin) (s-- 4))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|namesCapture) (s-- 5))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|visitNamesCaptureBuf) (s-- 5))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|recipsCapture) (s-- 6))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|recipsCaptureAndSend) (s-- 6))
-    (easy-menu-add-item b:mtdt:menu:dist:bbdb3 nil ($menuItem|visitRecipsCaptureFile) (s-- 6))
-
-    (easy-menu-add-item
-     b:mtdt:menu:dist:bbdb3
-     nil
-     (bx:menu:panelAndHelp|define
-      "/bisos/panels/blee-core/mail/_nodeBase_"
-      $thisFuncName
-      (intern (symbol-name (gensym))))
-     (s-- 9))
-
-    'b:mtdt:menu:dist:bbdb3
-    ))
-
-(orgCmntBegin "
-** Basic Usage:
-[[elisp:(popup-menu (symbol-value (b:mtdt:menu:dist:define|bbdb3)))][This menu as an org link]]
-#+BEGIN_SRC emacs-lisp
-(popup-menu (symbol-value (b:mtdt:menu:dist:define|bbdb3)))
-#+END_SRC
-" orgCmntEnd)
-
-
-
-;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:menu:dist:define|names" :advice ()
-(orgCmntBegin "
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:menu:dist:define|names>>  --   [[elisp:(org-cycle)][| ]]
-" orgCmntEnd)
-(defun b:mtdt:menu:dist:define|names (
-;;;#+END:
-                                 )
-  " #+begin_org
-** DocStr: Return b:mtdt:menu:dist:sendExtentSelect
-#+end_org "
-  (let (
-	($thisFuncName (compile-time-function-name))
-	)
-
-    (defun $menuItem|processBufferForBbdbRecip ()
-      (nth 0
-       `(
-         [,(s-lex-format "processBufferForBbdbRecip")
-          (b:mtdt:names/processBufferForBbdbRecip)
-          :help "processBufferForBbdbRecip"
-          :active t
-          :visible t
-          ]
-         )))
-
-    (defun $menuItem|processBufferForAddrRecip ()
-      (nth 0
-       `(
-         [,(s-lex-format "processBufferForAddrRecip")
-          (b:mtdt:names/processBufferForAddrRecip)
-          :help "processBufferForAddrRecip"
-          :active t
-          :visible t
-          ]
-         )))
-
-    (defun $menuItem|setBufferToRecipsFormsFile ()
-      (nth 0
-       `(
-         [,(s-lex-format "setBufferToRecipsFormsFile")
-          (b:mtdt:distr|curBufAsRecipsFormsFileSelected)
-          :help "setBufferToRecipsFormsFile"
-          :active t
-          :visible t
-          ]
-         )))
-
-    (easy-menu-define
-      b:mtdt:menu:dist:names
-      nil
-      "DocStr of this menu --"
-      `(,(format (s-lex-format "Names And RecipsForms Buffer Commands"))
-	:help "With BBDB Select MTDT Recipients"
-	,(s-- 3)
-	,(s-- 4)
-	,(s-- 5)
-	,(s-- 6)
-	,(s-- 7)
-	,(s-- 8)
-	,(s-- 9)
-	))
-
-    (easy-menu-add-item b:mtdt:menu:dist:names nil ($menuItem|processBufferForAddrRecip) (s-- 3))
-    (easy-menu-add-item b:mtdt:menu:dist:names nil ($menuItem|processBufferForBbdbRecip) (s-- 4))
-    (easy-menu-add-item b:mtdt:menu:dist:names nil ($menuItem|setBufferToRecipsFormsFile) (s-- 5))
-
-    (easy-menu-add-item
-     b:mtdt:menu:dist:names
-     nil
-     (bx:menu:panelAndHelp|define
-      "/bisos/panels/blee-core/mail/_nodeBase_"
-      $thisFuncName
-      (intern (symbol-name (gensym))))
-     (s-- 5))
-
-    'b:mtdt:menu:dist:names
-    ))
-
-(orgCmntBegin "
-** Basic Usage:
-[[elisp:(popup-menu (symbol-value (b:mtdt:menu:dist:define|names)))][This menu as an org link]]
-#+BEGIN_SRC emacs-lisp
-(popup-menu (symbol-value (b:mtdt:menu:dist:define|names)))
-#+END_SRC
 " orgCmntEnd)
 
 
@@ -363,7 +126,7 @@ Module description comes here.
     (defun $menuItem|selMailingDistribute ()
       (nth 0
            `(
-             [,(s-lex-format "Distribute SelectedMailing to SelRecipsFormsFile with ${b:mtdt:send:extent}")
+             [,(s-lex-format "Distribute SelectedMailing to SelRecipsFormsFile with ${b:mtdt:send+extent}")
               (b:mtdt:distr/selMailingToSelRecipsFormsFile)
               :help "Mail Composition Distribution and Tracking (MTDT) Setup With Current Buffer -- (mtdt:setup/with-curBuffer)"
               ])))
@@ -372,7 +135,7 @@ Module description comes here.
       b:mtdt:menu:dist:distr
       nil
       "DocStr of this menu --"
-      `(,(format (s-lex-format "Distribution of Selected Mailing and RecipsForms with ${b:mtdt:send:extent}"))
+      `(,(format (s-lex-format "Distribution of Selected Mailing and RecipsForms with ${b:mtdt:send+extent}"))
 	:help "Distribution of Selected Mailing and RecipsForms with"
 	,(s-- 3)
 	,(s-- 4)
@@ -467,18 +230,18 @@ Module description comes here.
 
 
 (defun b:mtdt:send:extent/setup (<fashion)
-  "Based on <fashion, set things up for sending control."
+  "NOTYEY, THIS IS ALL MESSED UP -- Based on <fashion, set things up for sending control."
   (cond
    ((eq <fashion  b:mtdt:send:control::basic)
-    (setq b:mtdt:compose:framework <fashion)
+    (setq b:mtdt:compose~framework <fashion)
     (when org-msg-mode
       (org-msg-mode -1)))
-   ((eq <fashion  b:mtdt:compose:framework::orgMsg)
-    (setq b:mtdt:compose:framework <fashion)
+   ((eq <fashion  'b:mtdt:compose+framework::orgMsg)
+    (setq b:mtdt:compose~framework <fashion)
     (when (not org-msg-mode)
       (org-msg-mode)))
-   ((eq <fashion  b:mtdt:compose:framework::latex)
-    (setq b:mtdt:compose:framework <fashion)
+   ((eq <fashion  'b:mtdt:compose+framework::latex)
+    (setq b:mtdt:compose~framework <fashion)
     (when org-msg-mode
       (org-msg-mode -1)))
    (t
@@ -505,16 +268,16 @@ Module description comes here.
     (defun describeMenuItem ()
       (nth 0
        `(
-         [,(s-lex-format "Describe b:mtdt:send:extent -- ${b:mtdt:send:extent}")
-          (describe-variable 'b:mtdt:send:extent)
+         [,(s-lex-format "Describe b:mtdt:send+extent -- ${b:mtdt:send+extent}")
+          (describe-variable 'b:mtdt:send+extent)
           :help "Mail Composition Distribution and Tracking (MTDT) Setup With Current Buffer -- (mtdt:setup/with-curBuffer)"
           ])))
 
     (defun selections ()
       "Static Selections"
       '(
-        b:mtdt:send:extent::doSend
-        b:mtdt:send:extent::promptSend
+        'b:mtdt:send+extent::doSend
+        'b:mtdt:send+extent::promptSend
         ))
 
     (easy-menu-define
@@ -522,14 +285,14 @@ Module description comes here.
       nil
       ""
       (append
-       `(,(s-lex-format "Select/Describe: b:mtdt:send:extent -- ${b:mtdt:send:extent}"))
+       `(,(s-lex-format "Select/Describe: b:mtdt:send+extent -- ${b:mtdt:send+extent}"))
        (list :help "Send Extent is one of sendIt or promptSend")
        (list (s-- 3))
        (list (s-- 4))
        (mapcar (lambda (<each)
-		 (vector (s-lex-format "Set b:mtdt:send:extent to ${<each}")
-			 `(b:mtdt:send:extent|set ,<each)
-			   :help (s-lex-format "Set b:mtdt:send:extent to ${<each}")
+		 (vector (s-lex-format "Set b:mtdt:send+extent to ${<each}")
+			 `(b:mtdt:send+extent|actuate ,<each)
+			   :help (s-lex-format "Set b:mtdt:send+extent to ${<each}")
 			 ))
 	       (selections))
        (list (s-- 5))
@@ -631,7 +394,7 @@ Module description comes here.
 #+end_org "
   (nth 0
    `(
-     [,(s-lex-format "Send SelectedMailing to SelectedRecips with ${b:mtdt:send:extent}")
+     [,(s-lex-format "Send SelectedMailing to SelectedRecips with ${b:mtdt:send+extent}")
       (b:mtdt:send/selMailingToSelRecips)
       :help "Mail Composition Distribution and Tracking (MTDT) Setup With Current Buffer -- (mtdt:setup/with-curBuffer)"
       ])))
@@ -648,10 +411,50 @@ Module description comes here.
 #+end_org "
   (nth 0
    `(
-     [,(s-lex-format "Distribute SelectedMailing to SelRecipsFormsFile with ${b:mtdt:send:extent}")
+     [,(s-lex-format "Distribute SelectedMailing to SelRecipsFormsFile with ${b:mtdt:send+extent}")
       (b:mtdt:distr/selMailingToSelRecipsFormsFile)
       :help "Mail Composition Distribution and Tracking (MTDT) Setup With Current Buffer -- (mtdt:setup/with-curBuffer)"
       ])))
+
+;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:menuItem:define|radio-sendExtent" :advice ()
+(orgCmntBegin "
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:menuItem:define|radio-sendExtent>>  --   [[elisp:(org-cycle)][| ]]
+" orgCmntEnd)
+(defun b:mtdt:menuItem:define|radio-sendExtent (
+;;;#+END:
+                                                <nth
+                                                )
+  " #+begin_org
+** DocStr: Return a menuItem vector. Requires dynamic update.
+#+end_org "
+  (nth <nth
+       `(
+        [
+	,(format (s-lex-format "Describe Selected Send Extent:: ${b:mtdt:send+extent}"))
+	  (describe-variable 'b:mtdt:send+extent)
+	  :help "Describe current value of b:mtdt:send+extent"
+	  :active t
+	  :visible t
+	  ]
+	[
+	  "promptSend (unsentBuffer)"
+	  (b:mtdt:send+extent|actuate 'b:mtdt:send+extent::promptSend)
+	  :help "Select promptSend."
+	  :active t
+	  :visible t
+	  :style radio
+	  :selected ,(eq  b:mtdt:send+extent 'b:mtdt:send+extent::promptSend)
+	  ]
+	 [
+	  "doSend (send/inject)"
+	  (b:mtdt:send+extent|actuate 'b:mtdt:send+extent::doSend)
+	  :help "Select doSend."
+	  :active t
+	  :visible t
+	  :style radio
+	  :selected ,(eq b:mtdt:send+extent 'b:mtdt:send+extent::doSend)
+	  ]
+         )))
 
 
 ;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:menu:dist:main|define" :advice ()
@@ -670,37 +473,20 @@ Module description comes here.
 	(<visible (get-arg <namedArgs :visible t))
 	(<active (get-arg <namedArgs :active t))
 	($thisFuncName (compile-time-function-name))
+        ($selectedStr (s-right 50 b:mtdt:distr:recipsFormsFileSelected))
 	)
 
     (easy-menu-define
       b:mtdt:menu:dist:main
       nil
       "DocStr of this menu --"
-      `(,(format (s-lex-format "MTDT Distribution Menu -- Compose Framework:: ${b:mtdt:compose:framework}"))
+      `(,(s-lex-format "MTDT Distribution -- Selected recipsFormsFile:: ${b:mtdt:distr:recipsFormsFileSelected}")
 	:help "MTDT (Mail Templating Distribution and Tracking"
 	:visible ,<visible
 	:active ,<active
 	,(s-- 2)
 	,(s-- 3)
 	,(s-- 4)
-	 [
-	  "unsentBuffer (promptSend)"
-	  (b:mtdt:send:extent|set b:mtdt:send:extent::promptSend)
-	  :help "Select promptSend."
-	  :active t
-	  :visible t
-	  :style radio
-	  :selected ,(eq  b:mtdt:send:extent b:mtdt:send:extent::promptSend)
-	  ]
-	 [
-	  "send (doSend)"
-	  (b:mtdt:send:extent|set b:mtdt:send:extent::doSend)
-	  :help "Select doSend."
-	  :active t
-	  :visible t
-	  :style radio
-	  :selected ,(eq b:mtdt:send:extent b:mtdt:send:extent::doSend)
-	  ]
 	 ,(s-- 5)
 	 ,(s-- 6)
 	 ,(s-- 7)
@@ -710,33 +496,38 @@ Module description comes here.
 	 ,(s-- 11)
 	 ))
 
-    (easy-menu-add-item b:mtdt:menu:dist:main nil
-                        (b:mtdt:menu:mailing:define|derivedMailingInvoke)
-                        (s-- 2))
+    ;; (easy-menu-add-item b:mtdt:menu:dist:main nil
+    ;;                     (b:mtdt:menu:mailing:define|derivedMailingInvoke)
+    ;;                     (s-- 2))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                        (b:mtdt:menu:mailing:define|selMailingSelect)
-                       (s-- 3))
+                       (s-- 2))
 
-    (easy-menu-add-item b:mtdt:menu:dist:main nil
-                        (b:mtdt:menu:dist:define|bbdb3)
-                        (s-- 6))
+    ;; (easy-menu-add-item b:mtdt:menu:dist:main nil
+    ;;                     (b:mtdt:menu:dist:define|bbdb3)
+    ;;                     (s-- 6))
 
-    (easy-menu-add-item b:mtdt:menu:dist:main nil
-                       (b:mtdt:menu:dist:define|sendExtentSelect)
-                       (s-- 7))
+    ;; (easy-menu-add-item b:mtdt:menu:dist:main nil
+    ;;                    (b:mtdt:menu:dist:define|sendExtentSelect)
+    ;;                    (s-- 7))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                        (b:mtdt:menu:menuItem:define|selRecipsDescribe)
-                       (s-- 7))
+                       (s-- 3))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                        (b:mtdt:menu:menuItem:define|selRecipsFormsDescribe)
-                       (s-- 7))
+                       (s-- 3))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                        (b:mtdt:menu:menuItem:define|selRecipsFormsFileDescribe)
-                       (s-- 7))
+                       (s-- 3))
+
+    (loop-for-each $i (number-sequence 0 2 1)
+      (easy-menu-add-item b:mtdt:menu:dist:main nil
+                          (b:mtdt:menuItem:define|radio-sendExtent $i)
+                          (s-- 4)))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                         (b:mtdt:menu:menuItem:define|selMailingSend)
@@ -746,9 +537,9 @@ Module description comes here.
                         (b:mtdt:menu:dist:define|distr)
                         (s-- 8))
 
-    (easy-menu-add-item b:mtdt:menu:dist:main nil
-                       (b:mtdt:menu:dist:define|names)
-                       (s-- 9))
+    ;; (easy-menu-add-item b:mtdt:menu:dist:main nil
+    ;;                    (b:mtdt:menu:dist:define|names)
+    ;;                    (s-- 9))
 
     (easy-menu-add-item b:mtdt:menu:dist:main nil
                        (b:mtdt:menu:dist:define|logs)

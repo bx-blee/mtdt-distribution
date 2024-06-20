@@ -58,19 +58,62 @@ Module description comes here.
 ;;;#+END:
 
 
+;;;#+BEGIN:  b:elisp:defs/defgroup :defName "b:mtdt:send" :defValue "nil"
+(orgCmntBegin "
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defgroup   [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:send>> ~nil~ --  -- Blee Mailings Library. Used by b:b:mtdt:distr.  [[elisp:(org-cycle)][| ]]
+" orgCmntEnd)
 (defgroup b:mtdt:send nil
-  "Blee BBDB3 Library. Used by b:mtdt:distr."
+;;;#+END:
+" #+begin_org
+** DocStr: Blee MTDT Distribution Library. Used by b:mtdt:distr.
+#+end_org "
   :group 'blee
-  :prefix "b:mtdt:send:"
+  :prefix "b:b:mtdt:send:"
   :link '(file-link "/bisos/panels/blee-core/mail/_nodeBase_/fullUsagePanel-en.org")
   )
 
-(defconst b:mtdt:send:extent::doSend "doSend" "Send/Submit the mailing. Does not prompt, just send it.")
-(defconst b:mtdt:send:extent::promptSend "promptSend" "Compose but do not submit. Prompt before sending.")
+;;;#+BEGIN:  b:elisp:defs/defcustom :defName "b:mtdt:send+extent" :defValue "'b:mtdt:send+extent::promptSend" :comment "/MENU/"
+(orgCmntBegin "
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defcustom  [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:send+extent>> ~'b:mtdt:send+extent::promptSend~ -- /MENU/ -- Selected Send Extent.  [[elisp:(org-cycle)][| ]]
+" orgCmntEnd)
+(defcustom b:mtdt:send+extent 'b:mtdt:send+extent::promptSend
+;;;#+END:
+    " #+begin_org
+** DocStr: Selected Send Extent.
+#+end_org "
+	:group 'b:mtdt:send
+	:type '(choice
+	        (const :tag "promptSend" b:mtdt:send+extent::promptSend "Compose but do not submit. Prompt before sending." )
+		(const :tag "doSend" b:mtdt:send+extent::doSend "Send/Submit the mailing. Does not prompt, just send it.")
+                ))
 
-(defvar b:mtdt:send:extent
-  b:mtdt:send:extent::promptSend
-  "Selected Send Extent.")
+;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:send+extent|actuate" :advice ()
+(orgCmntBegin "
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:send+extent|actuate>>  --  -- Based on <framework, set things up for composition in that framework.  [[elisp:(org-cycle)][| ]]
+" orgCmntEnd)
+(defun b:mtdt:send+extent|actuate (
+;;;#+END:
+                                       <sendExtent
+                                       )
+  " #+begin_org
+** DocStr: Based on <sendExt, set things up for sending.
+#+end_org "
+  (let* (
+         ($inHere (b:log|entry (b:func$entry)))
+	 )
+    (b:var:custom:choices|set 'b:mtdt:send+extent <sendExtent)
+    ))
+
+(orgCmntBegin "
+** Basic Usage:
+#+BEGIN_SRC emacs-lisp
+(b:mtdt:send+extent|actuate 'b:mtdt:send+extent::promptSend)
+#+END_SRC
+
+#+RESULTS:
+: promptSend
+
+" orgCmntEnd)
 
 
 ;;;#+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title "Common Facilities" :extraInfo "Library Candidates"
@@ -78,38 +121,6 @@ Module description comes here.
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _Common Facilities_: |]]  Library Candidates  [[elisp:(org-shifttab)][<)]] E|
 " orgCmntEnd)
 ;;;#+END:
-
-;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:send:extent|set" :advice ()
-(orgCmntBegin "
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:send:extent|set>>  --   [[elisp:(org-cycle)][| ]]
-" orgCmntEnd)
-(defun b:mtdt:send:extent|set (
-;;;#+END:
-                               <sendExtent
-                               )
-  " #+begin_org
-** DocStr: Get the first email address for =<nameStr= if it is unique.
-Return 'No Records' if =<nameStr=  is not found.
-Return 'Nu of Records=' if multiple records are found for =<nameStr=.
-#+end_org "
-  (interactive)
-  (let* (
-          ($inHere (b:log|entry (b:func$entry)))
-          ($result <sendExtent)
-          )
-     (setq b:mtdt:send:extent <sendExtent)
-     $result))
-
-(orgCmntBegin "
-** Basic Usage:
-#+BEGIN_SRC emacs-lisp
-(b:mtdt:send:extent|set b:mtdt:send:extent::promptSend)
-#+END_SRC
-
-#+RESULTS:
-: promptSend
-
-" orgCmntEnd)
 
 
 ;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:send|basedOnFrwrk" :advice ()
@@ -142,7 +153,7 @@ Return 'Nu of Records=' if multiple records are found for =<nameStr=.
 (orgCmntBegin "
 ** Basic Usage:
 #+BEGIN_SRC emacs-lisp
-(b:mtdt:send:extent|set b:mtdt:send:extent::promptSend)
+NOTYET
 #+END_SRC
 
 #+RESULTS:
@@ -163,7 +174,7 @@ Return 'Nu of Records=' if multiple records are found for =<nameStr=.
                                                      (to (list))
                                                      (cc (list))
                                                      (bcc (list))
-                                                     (extent b:mtdt:send:extent::promptSend)
+                                                     (extent b:mtdt:send+extent::promptSend)
                                                      )
    " #+begin_org
 ** DocStr: Add recepients to each mailing and send it out.
@@ -197,7 +208,7 @@ Returns /nothing/.
              (mail-bcc)
              (b:email:address|insert $eachRecipient)
              )
-           (when (eq extent b:mtdt:send:extent::doSend)
+           (when (eq extent b:mtdt:send+extent::doSend)
              ;; send the email
              (b:mtdt:send|basedOnFrwrk))
            )))))
@@ -225,7 +236,7 @@ Returns /nothing/.
                                                      (to (list))
                                                      (cc (list))
                                                      (bcc (list))
-                                                     (extent b:mtdt:send:extent::promptSend)
+                                                     (extent 'b:mtdt:send+extent::promptSend)
                                                      )
    " #+begin_org
 ** DocStr: Add recepients to each mailing and send it out.
@@ -246,9 +257,9 @@ Returns /nothing/.
                     "Missing :to named argument")))
        (else-when to
          (dolist ($eachMailing mailingFns)
-           (when (eq extent b:mtdt:send:extent::doSend)
+           (when (eq extent 'b:mtdt:send+extent::doSend)
              (call-interactively  $eachMailing))
-           (when (eq extent b:mtdt:send:extent::promptSend)
+           (when (eq extent 'b:mtdt:send+extent::promptSend)
              (b:mtdt:mailings|framedComposeWithFn $eachMailing))
            (dolist ($eachRecipient to)
              (mail-to)
@@ -262,7 +273,7 @@ Returns /nothing/.
              (mail-bcc)
              (b:email:address|insert $eachRecipient)
              )
-           (when (eq extent b:mtdt:send:extent::doSend)
+           (when (eq extent 'b:mtdt:send+extent::doSend)
              ;; send the email
              (b:mtdt:send|basedOnFrwrk)
            ))))))
@@ -285,7 +296,7 @@ Returns /nothing/.
 ;;;#+END:
                                                         &key
                                                         (mailingFiles (list))
-                                                        (extent b:mtdt:send:extent::promptSend)
+                                                        (extent b:mtdt:send+extent::promptSend)
                                                         )
    " #+begin_org
 ** DocStr: DeSelect and b:mtdt:send|applySelRecipientsToMailingFiles
@@ -313,7 +324,7 @@ Returns /nothing/.
 ;;;#+END:
                                                         &key
                                                         (mailingFiles (list))
-                                                        (extent b:mtdt:send:extent::promptSend)
+                                                        (extent b:mtdt:send+extent::promptSend)
                                                         )
    " #+begin_org
 ** DocStr: Add recepients to each mailing and send it out.
@@ -363,7 +374,7 @@ Returns /nothing/.
 ;;;#+END:
                                                         &key
                                                         (mailingFns (list))
-                                                        (extent b:mtdt:send:extent::promptSend)
+                                                        (extent b:mtdt:send+extent::promptSend)
                                                         )
    " #+begin_org
 ** DocStr: Add recepients to each mailing and send it out.
@@ -394,7 +405,7 @@ Returns /nothing/.
 ;;;#+END:
                                                         &key
                                                         (mailingFns (list))
-                                                        (extent b:mtdt:send:extent::promptSend)
+                                                        (extent b:mtdt:send+extent::promptSend)
                                                         )
    " #+begin_org
 ** DocStr: Add recepients to each mailing and send it out.
@@ -461,7 +472,7 @@ Returns /nothing/.
         (if-when b:mtdt:mailings:selected
           (b:mtdt:send|applySelRecipientsToMailingFns
            :mailingFns b:mtdt:mailings:selected
-           :extent b:mtdt:send:extent
+           :extent b:mtdt:send+extent
           )))))
 
 (orgCmntBegin "

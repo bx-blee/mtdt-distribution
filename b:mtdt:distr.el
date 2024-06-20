@@ -141,7 +141,7 @@ Module description comes here.
                                                        &key
                                                        (mailingFiles (list))
                                                        (recipsForms (list))
-                                                       (extent b:mtdt:send:extent::promptSend)
+                                                       (extent 'b:mtdt:send+extent::promptSend)
                                                        )
    " #+begin_org
 ** DocStr:
@@ -190,7 +190,7 @@ Module description comes here.
                                                      &key
                                                      (mailingFns (list))
                                                      (recipsForms (list))
-                                                     (extent b:mtdt:send:extent::promptSend)
+                                                     (extent 'b:mtdt:send+extent::promptSend)
                                                      )
    " #+begin_org
 ** DocStr:
@@ -239,7 +239,7 @@ Module description comes here.
                                                             &key
                                                             (mailingFiles (list))
                                                             (recipsFormsFiles (list))
-                                                            (extent b:mtdt:send:extent::promptSend)
+                                                            (extent 'b:mtdt:send+extent::promptSend)
                                                             )
    " #+begin_org
 ** DocStr:
@@ -285,7 +285,7 @@ Module description comes here.
                                                             &key
                                                             (mailingFns (list))
                                                             (recipsFormsFiles (list))
-                                                            (extent b:mtdt:send:extent::promptSend)
+                                                            (extent 'b:mtdt:send+extent::promptSend)
                                                             )
    " #+begin_org
 ** DocStr:
@@ -349,7 +349,7 @@ Module description comes here.
           (b:mtdt:distr|applyRecipientsRecipsFormsFilesToMailingFns
            :mailingFns (list b:mtdt:mailings:selected)
            :recipsFormsFiles (list b:mtdt:distr:recipsFormsFileSelected)
-           :extent b:mtdt:send:extent
+           :extent b:mtdt:send+extent
           )))))
 
 (orgCmntBegin "
