@@ -245,6 +245,7 @@ Returns /nothing/.
 #+end_org "
    (let* (
           ($inHere (b:log|entry (b:func$entry)))
+          ($curBuf)
           )
      (if-unless mailingFns
        (b::error $inHere
@@ -260,8 +261,14 @@ Returns /nothing/.
            (when (eq extent 'b:mtdt:send+extent::doSend)
              (call-interactively  $eachMailing))
            (when (eq extent 'b:mtdt:send+extent::promptSend)
-             (b:mtdt:mailings|framedComposeWithFn $eachMailing))
+             (display-buffer
+              (switch-to-buffer
+               (b:mtdt:mailings|framedComposeWithFn $eachMailing))
+              ))
            (dolist ($eachRecipient to)
+             (message (s-lex-format "${$inHere}:: Processing: ${$eachRecipient}"))
+             (setq $curBuf (current-buffer))
+             (message (s-lex-format "${$inHere}:: Current Buffer: ${$curBuf}"))
              (mail-to)
              (b:email:address|insert $eachRecipient)
              )
@@ -281,8 +288,8 @@ Returns /nothing/.
 (orgCmntBegin "
 ** Basic Usage:
 #+BEGIN_SRC emacs-lisp
-(b:mtdt:distr|applyRecipientsToMailings
-    :mailing `(,(symbol-name '/bxo/r3/iso/piu_mbFullUsage/mailings/compose/com/gmail/mohsen.banan.byname/from/org/content.msgOrg))
+(b:mtdt:send|applyRecipientsToMailingFns
+    :mailing `(,(symbol-name '/bxo/r3/iso/piu_mbFullUsage/mailings/compose/com/gmail/mohsen.banan.byname/from/org/content.orgMsg))
     :to `(,(b:email|oorr :addr (symbol-name 'mohsen.banan.byname@gmail.com)))
   )
 #+END_SRC
@@ -359,7 +366,7 @@ Returns /nothing/.
 ** Basic Usage:
 #+BEGIN_SRC emacs-lisp
 (b:mtdt:send|applySelRecipientsToMailingFiles
-    :mailingFiles `(,(symbol-name '/bxo/r3/iso/piu_mbFullUsage/mailings/compose/com/gmail/mohsen.banan.byname/from/org/content.msgOrg))
+    :mailingFiles `(,(symbol-name '/bxo/r3/iso/piu_mbFullUsage/mailings/compose/com/gmail/mohsen.banan.byname/from/org/content.orgMsg))
   )
 #+END_SRC
 " orgCmntEnd)
@@ -485,6 +492,36 @@ Returns /nothing/.
 : No Records
 
 " orgCmntEnd)
+
+;;;#+BEGIN:  b:elisp:defs/defun :defName "b:mtdt:send/selectAndSelMailingToSelRecips" :advice ()
+(orgCmntBegin "
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  defun      [[elisp:(outline-show-subtree+toggle)][||]]  <<b:mtdt:send/selectAndSelMailingToSelRecips>>  --  --   [[elisp:(org-cycle)][| ]]
+" orgCmntEnd)
+(defun b:mtdt:send/selectAndSelMailingToSelRecips (
+;;;#+END:
+                                                   <mailingFile
+                                                   )
+  " #+begin_org
+** DocStr:
+#+end_org "
+   (let* (
+          ($inHere (b:log|entry (b:func$entry)))
+          )
+     (b:mtdt:mailings|selectWithFile <mailingFile)
+     (b:mtdt:send/selMailingToSelRecips)
+     ))
+
+(orgCmntBegin "
+** Basic Usage:
+#+BEGIN_SRC emacs-lisp
+(b:mtdt:send/selMailingToSelRecips)
+#+END_SRC
+
+#+RESULTS:
+: No Records
+
+" orgCmntEnd)
+
 
 ;;;#+BEGIN: b:elisp:file/provide :modName nil
 (provide 'b:mtdt:send)
